@@ -1,1 +1,1 @@
-virsh create vm_spec.config
+virsh create ../vm_configs/46c.conf

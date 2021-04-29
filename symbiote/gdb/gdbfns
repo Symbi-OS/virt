@@ -5,7 +5,7 @@ del
 end
 
 define getsk
-set sk = $arg0
+set sym_sk = $arg0
 end
 
 # Gotta run from tcp_sendmsg
@@ -16,7 +16,7 @@ end
 # Gotta run after setting sk
 
 define set_tcp_hb
-hb tcp_sendmsg if sk == sk
+hb tcp_sendmsg if sk == sym_sk
 c
 del
 end
@@ -35,6 +35,17 @@ define prepare_msg
 	get_msg_struct
 	get_iov
 	get_kiocb
+end
+
+define sym_run
+	connect_redis
+	getsk $arg0
+	set_tcp_hb
+	prepare_msg
+end
+
+define sym_swing_shortcut
+	p use_shortcut = 1
 end
 
 define print_msg_struct
