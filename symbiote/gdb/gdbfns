@@ -1,0 +1,42 @@
+define connect_redis
+hb connSocketWrite
+c
+del
+end
+
+define getsk
+set sk = $arg0
+end
+
+# Gotta run from tcp_sendmsg
+define get_msg_struct
+set *(struct msghdr *) msg_struct = *msg
+end
+
+# Gotta run after setting sk
+
+define set_tcp_hb
+hb tcp_sendmsg if sk == sk
+c
+del
+end
+
+# Gotta be in tcp_sendmsg
+define get_iov
+  set ((struct msghdr *) msg_struct)->msg_iter.iov = &iov
+end
+
+define get_kiocb
+	set *(struct kiocb *) kiocb_struct = *msg->msg_iocb
+	set ((struct msghdr *) msg_struct)->msg_iocb = &kiocb_struct
+end
+
+define prepare_msg
+	get_msg_struct
+	get_iov
+	get_kiocb
+end
+
+define print_msg_struct
+p *(struct msghdr *) msg_struct
+end
