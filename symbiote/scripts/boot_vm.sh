@@ -1,1 +1,1 @@
-virsh create ../vm_configs/46c.conf
+virsh create ../vm_configs/8c_pinned.conf
