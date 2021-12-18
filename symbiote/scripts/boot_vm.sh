@@ -1,1 +1,1 @@
-virsh create ../vm_configs/8c_pinned.conf
+virsh create ../vm_configs/fed35-16c.conf

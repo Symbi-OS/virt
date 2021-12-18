@@ -1,2 +1,2 @@
-virsh console Fedora33Sym
+virsh console fed35
 
