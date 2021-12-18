@@ -1,2 +1,0 @@
-virsh console Fedora33
-
