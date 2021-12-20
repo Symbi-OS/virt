@@ -1,11 +1,11 @@
-virt-install --name fed35 \
---description 'Fedora 35 Server' \
---ram 4096 \
---vcpus 4 \
---disk path=guest_disk.img \
---os-type linux \
---os-variant fedora34 \
---network bridge=virbr0 \
---graphics none \
---extra-args='console=ttyS0' \
---location ./Fedora-Server-dvd-x86_64-35-1.2.iso
+virt-install \
+	--name fed35 \
+	--description 'Fedora 35 Server' \
+	--ram 40960 \
+	--vcpus 46 \
+	--disk path=guest_disk.img \
+	--os-type linux \
+	--os-variant fedora34 \
+	--network bridge=virbr0,model=virtio \
+	--graphics none \
+	--boot hd
