@@ -1,0 +1,8 @@
+#!/bin/bash
+src=$1
+dst=$2
+
+[[ -z $src ]] && src=guest-disk.img
+[[ -z $dst ]] && dst=guest-disk.qcow2
+
+qemu-img convert -f raw -O qcow2 $src $dst
