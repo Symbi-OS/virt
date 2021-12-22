@@ -4,6 +4,11 @@ set -e
 img=${1:-guest_disk.img}
 port=${2}
 
+# to get a better stable console that passes control-c to guest use
+SERIAL="mon:stdio"
+# otherwise use this to allow control-c to kill instance
+#SERIAL="stdio"
+
 
 # if TAG is not empty then attempt to start the image with snapshot specified
 # eg to use : TAG=symbooted ./do guest-disk.qcow2 
@@ -31,7 +36,7 @@ fi
 echo $port > sym.sshport
 
 set -x
-qemu-system-x86_64 -M accel=$accel -smp cpus=2 -m 10G -hda $img -nodefaults -nographic -serial stdio $TAG\
+qemu-system-x86_64 -M accel=$accel -smp cpus=2 -m 10G -hda $img -nodefaults -nographic -serial $SERIAL $TAG\
    -monitor unix:monitor.sock,server,nowait \
    -device virtio-net-pci,mq=on,vectors=10,mac=02:00:00:04:00:29,netdev=p00 \
    -netdev user,id=p00,hostfwd=tcp::$port-:22 
