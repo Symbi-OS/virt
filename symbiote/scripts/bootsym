@@ -1,0 +1,1 @@
+TAG=symbooted ./do guest-disk.qcow2

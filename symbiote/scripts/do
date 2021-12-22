@@ -1,7 +1,22 @@
 #!/bin/bash
-set -x
+#set -x
+set -e
 img=${1:-guest_disk.img}
 port=${2}
+
+
+# if TAG is not empty then attempt to start the image with snapshot specified
+# eg to use : TAG=symbooted ./do guest-disk.qcow2 
+if [[ -n $TAG ]]; then
+   if  qemu-img snapshot -l $img | grep " $TAG "; then
+       TAG="-loadvm $TAG"
+   else
+       echo "ERROR: $TAG is not a snapshot in $img:" > /dev/stderr
+       qemu-img snapshot -l $img > /dev/stderr
+       exit -1
+   fi
+fi
+
 
 [[ -z $port ]] && port=$RANDOM
 
@@ -15,10 +30,11 @@ fi
 # put the above in grub config
 echo $port > sym.sshport
 
-qemu-system-x86_64 -M accel=$accel -smp cpus=2 -m 10G -hda $img -nodefaults -nographic -serial stdio \
+set -x
+qemu-system-x86_64 -M accel=$accel -smp cpus=2 -m 10G -hda $img -nodefaults -nographic -serial stdio $TAG\
    -monitor unix:monitor.sock,server,nowait \
    -device virtio-net-pci,mq=on,vectors=10,mac=02:00:00:04:00:29,netdev=p00 \
-   -netdev user,id=p00,hostfwd=tcp::$port-:22
+   -netdev user,id=p00,hostfwd=tcp::$port-:22 
 
 #-net nic,model=virtio,macaddr=54:54:00:55:55:55 \
 #-net tap,script=./tap-up,downscript=./tap-down
