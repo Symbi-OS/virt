@@ -1,0 +1,1 @@
+rlwrap socat -,echo=0,icanon=0 unix-connect:monitor.sock
