@@ -1,1 +1,1 @@
-virsh dumpxml fed35 >> vm_spec.config
+virsh dumpxml fed35 > vm_spec.config
