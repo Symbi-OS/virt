@@ -3,7 +3,7 @@ virt-install \
 	--description 'Fedora 36 Server' \
 	--ram 40960 \
 	--vcpus 46 \
-	--disk path=/dev/sda1 \
+	--disk path=./guest_disk.img \
 	--os-type linux \
 	--os-variant fedora31 \
 	--network bridge=virbr0,model=virtio \
