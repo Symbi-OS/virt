@@ -1,11 +1,11 @@
 virt-install \
-	--name fed35 \
-	--description 'Fedora 35 Server' \
+	--name fed36 \
+	--description 'Fedora 36 Server' \
 	--ram 40960 \
 	--vcpus 46 \
-	--disk path=guest_disk.img \
+	--disk path=/dev/sda1 \
 	--os-type linux \
-	--os-variant fedora34 \
+	--os-variant fedora31 \
 	--network bridge=virbr0,model=virtio \
 	--graphics none \
 	--boot hd
