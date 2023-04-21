@@ -1,1 +1,19 @@
 Put your disks here
+
+fdisk /dev/sdc
+sudo mkfs.ext4 /dev/sdc1
+
+NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+sda      8:0    0 223.6G  0 disk 
+├─sda1   8:1    0    25G  0 part /boot/efi
+└─sda2   8:2    0   198G  0 part /
+sdb      8:16   0 223.6G  0 disk 
+├─sdb1   8:17   0    25G  0 part 
+└─sdb2   8:18   0   198G  0 part /root/sdb_mt
+sdc      8:32   0 894.3G  0 disk 
+└─sdc1   8:33   0 894.3G  0 part /root/virt/symbiote/disks/sdc1_mt
+sdd      8:48   0 894.3G  0 disk 
+└─sdd1   8:49   0 894.3G  0 part /root/virt/symbiote/kickstart/disk
+sde      8:64   0 223.6G  0 disk 
+sdf      8:80   0 223.6G  0 disk 
+zram0  252:0    0     8G  0 disk [SWAP]
