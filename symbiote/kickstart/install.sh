@@ -1,7 +1,7 @@
 virt-install \
   --name fedora36kele \
   --ram 200000 \
-  --disk path="$(pwd)/disk/fedora36.qcow2,size=20,format=qcow2" \
+  --disk path="$(pwd)/disk/fedora36.qcow2,size=200,format=qcow2" \
   --vcpus 79 \
   --os-variant fedora36 \
   --network bridge=virbr0 \
