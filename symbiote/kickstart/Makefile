@@ -1,17 +1,34 @@
-fedora36-ks.iso: fedora36.ks
-	genisoimage -o fedora36-ks.iso -r -J -V "KICKSTART" fedora36.ks
+help:
 
-prereqs:
-	sudo dnf install genisoimage -y
+kelevate_vm: disk
+	./install.sh
+
+fedora_prereqs:
+	sudo dnf install -y virt-manager libvirt libvirt-daemon libvirt-daemon-config-network qemu-kvm
+	sudo dnf install -y @virtualization
+	sudo systemctl start libvirtd
+	sudo systemctl enable libvirtd
+
+# TODO: Test on Ubuntu.
+ubuntu_prereqs:
+	echo THIS IS UNTESTED ON UBUNTU!
+	sudo apt-get update
+	sudo apt-get install -y virtinst qemu-kvm libvirt-daemon libvirt-daemon-system libvirt-clients bridge-utils
+	sudo systemctl start libvirtd
+	sudo systemctl enable libvirtd
+
+disk:
+	mkdir disk
 
 destroy:
 	virsh destroy fedora36kele
+
 undefine:
 	virsh undefine fedora36kele
+
 disk_rm:
 	rm disk/fedora36.qcow2
-virsh_install:
-	./install.sh
+
 clean:
 	$(MAKE) destroy
 	$(MAKE) undefine

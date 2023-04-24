@@ -1,9 +1,13 @@
+total_memory=$(free -m | awk '/^Mem:/{print $2}')
+ram_allocation=$((total_memory * 3 / 4))
+total_cores=$(nproc)
+
 virt-install \
   --name fedora36kele \
-  --ram 200000 \
+  --ram $ram_allocation \
   --disk path="$(pwd)/disk/fedora36.qcow2,size=200,format=qcow2" \
-  --vcpus 79 \
-  --os-variant fedora36 \
+  --check disk_size=off \
+  --vcpus $total_cores \
   --network bridge=virbr0 \
   --graphics none \
   --console pty,target_type=serial \
@@ -11,6 +15,8 @@ virt-install \
   --initrd-inject="$(pwd)/fedora36.ks" \
   --extra-args "inst.ks=file:/fedora36.ks console=ttyS0,115200n8" \
   --wait -1
+
+#  --os-variant fedora36 \
 
 #--cdrom path="$(pwd)/fedora36-ks.iso",device=cdrom \
 

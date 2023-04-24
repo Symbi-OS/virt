@@ -1,7 +1,9 @@
 Requirements:
-You need a network connection to pull the disk image.
-We allocate memory and vcpus to the VM, check if you're happy with those properties.
+You need a network connection to pull the disk image and install packages.
 
-The disk will be allocated lazily.
+We allocate 3/4 of your system memory and the full count of cpus to the VM, check if you're happy with those properties.
 
-Assume you have a dir here called disks
+We allocate a 200G disk lazily. You do not need that much space up front.
+
+The disk lives in the ./disk directory which will be created here,
+but is a degree of freedom for you to mount another disk if you want.
