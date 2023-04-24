@@ -27,6 +27,17 @@ zerombr
 clearpart --all --initlabel
 autopart --type=lvm
 
+# clearpart --all --initlabel
+# autopart --type=lvm --fstype="ext4" --lvmpvopts="--metadatasize=128M" --lvmlvopts="--thinpool --metadatasize=128M" --grow
+
+# clearpart --all --initlabel
+# part /boot --fstype=xfs --size=1024
+# part pv.01 --size=1 --grow
+# volgroup myvg pv.01
+# logvol / --fstype=ext4 --vgname=myvg --size=1 --grow --thin --name=lv_root
+# logvol /home --fstype=ext4 --vgname=myvg --size=1 --grow --thin --name=lv_home
+
+
 # Set the root password
 rootpw --plaintext root
 
