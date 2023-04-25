@@ -1,2 +1,0 @@
-virsh console fed35
-

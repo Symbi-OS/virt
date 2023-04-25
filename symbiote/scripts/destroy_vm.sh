@@ -1,1 +1,0 @@
-virsh destroy fed35

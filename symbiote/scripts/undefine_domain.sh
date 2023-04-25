@@ -1,1 +1,0 @@
-virsh undefine fed35

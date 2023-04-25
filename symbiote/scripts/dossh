@@ -1,9 +1,0 @@
-#!/bin/bash
-port=${SYM_SSH_PORT}
-host=localhost
-user=sym 
-
-[[ -z $port ]]  && [[ -a sym.sshport ]] && port=$(cat sym.sshport)
-[[ -z $port ]] && port=5555
-
-ssh -p $port $host -l $user 

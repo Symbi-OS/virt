@@ -1,1 +1,0 @@
-TAG=booted ./do guest-disk.qcow2
