@@ -5,7 +5,7 @@ DOMAIN=fedora36kele
 LOCATION="https://download.fedoraproject.org/pub/fedora/linux/releases/36/Everything/$(uname -i)/os/" 
 
 if ! wget --spider --quiet "$LOCATION"; then
-    echo "Error: The URL does not exist" >&2
+    echo "Error: The URL $LOCATION does not exist" >&2
     exit 1
 fi
 
