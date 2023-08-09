@@ -34,7 +34,9 @@ disk:
 
 # Clean up the vm and disk
 # This destroys everything
+# XXX removing the kickstart file is better than nothing, but will prob cause a problem down the line.
 clean:
+	rm -rf fedora36kele.ks
 	virsh destroy $(DOMAIN)
 	virsh undefine $(DOMAIN)
 	rm disk/$(DOMAIN).qcow2

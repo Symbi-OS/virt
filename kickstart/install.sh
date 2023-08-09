@@ -2,13 +2,23 @@ total_memory=$(free -m | awk '/^Mem:/{print $2}')
 ram_allocation=$((total_memory * 3 / 4))
 total_cores=$(nproc)
 DOMAIN=fedora36kele
-LOCATION="https://download.fedoraproject.org/pub/fedora/linux/releases/36/Everything/$(uname -i)/os/" 
+
+# XXX: This only works as long as they choose to host these files.
+# First thing to do if having issues is to find another mirror that does.
+# XXX: Does this work for ARM?
+LOCATION="https://mirror.servaxnet.com/fedora/linux/releases/36/Everything/$(uname -i)/os/"
+
+# We used to use this, but now it (usually) redirects you to a mirror that no longer hosts it.
+#LOCATION="https://download.fedoraproject.org/pub/fedora/linux/releases/36/Everything/$(uname -i)/os/"
 
 if ! wget --spider --quiet "$LOCATION"; then
     echo "Error: The URL $LOCATION does not exist" >&2
     exit 1
 fi
 
+# XXX I hate this autogeneration of the kickstart file. 
+# It's already lead to a bug where $LOCATION didn't get updated after changing it.
+# Lets get rid of it asap.
 if [[ ! -a $DOMAIN.ks ]]; then
 # create $DOMAIN.ks
 cat >$DOMAIN.ks <<EOF
